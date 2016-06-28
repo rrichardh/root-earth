@@ -2,4 +2,4 @@ Para correr la aplicacion correctamente; ejecutar el siguiente comando en la ter
 
 npm install  
 
-/* para carga el proyecto con las preferencias de package.json*/
+/* para poder cargar el proyecto con las preferencias que se usaron, incluidas en package.json*/
