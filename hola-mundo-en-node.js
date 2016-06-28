@@ -9,4 +9,4 @@ aplicacion.get('/', function(req, res){
 });
 
 aplicacion.listen(3000);
-console.log('Servidor corriendo en LOCALHOST...')
+console.log('Servidor corriendo en LOCALHOST...');
