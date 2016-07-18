@@ -1,10 +1,13 @@
 var express = require("express");
+var bodyParser = require("body-parser");
 
 var server = express();
 
+server.set("view engine", "jade");
+
 server.get('/', function(req, res){
 	
-	res.send("Bienvenidos, esta es la página de inicio...");//manda la respuesta y cierra la conexion - res.end
+	res.render("index");//render a index.jade
 });
 
 server.listen(3000);
