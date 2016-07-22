@@ -1,6 +1,7 @@
 var express = require("express");
 var bodyParser = require("body-parser");
 var Usuario = require("./models/usuario").Usuario;
+
 var server = express();
 
 //middlewares
@@ -30,12 +31,34 @@ server.get('/login', function(req, res){
 });
 
 server.post("/users", function(req, res){
+	console.log("Nombres: "+req.body.nombres);
+	console.log("apellidos: "+req.body.apellidos);
+	console.log("dni: "+req.body.dni);
+	console.log("fecha: "+req.body.nacimiento);
+	console.log("direccion: "+req.body.direccion);
+	console.log("cell: "+req.body.cel);
+	console.log("email: "+req.body.email);
 	console.log("Usuario: "+req.body.usuario);
 	console.log("Contraseña: "+req.body.password);
 	
-	var usuarioActual = new Usuario({usuario:req.body.usuario, password:req.body.password});
+	var usuarioActual = new Usuario({
+									nombre:req.body.nombres,
+									apellido:req.body.apellidos,
+									dni:req.body.dni,
+									fecha_naci: req.body.nacimiento,
+									direccion:req.body.direccion,
+									cel:req.body.cel,
+									email:req.body.email,
+									usuario:req.body.usuario, 
+									password:req.body.password,
+									password_confirmacion: req.body.password_confirmation
+								});
 
-	usuarioActual.save(function(){
+	console.log(usuarioActual.password_confirmacion);
+	usuarioActual.save(function(err){
+		if(err){
+			console.log(String(err));
+		}
 		res.send("Guardamos tus datos...");
 	})
 
