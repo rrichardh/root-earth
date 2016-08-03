@@ -41,9 +41,16 @@ server.get('/login', function(req, res){
 
 server.post("/sessions", function(req, res){
 	Usuario.findOne({usuario:req.body.usuario, password:req.body.password}, function(err, user){
-		req.session.user_id = user._id;
-		res.redirect("/app");
-		console.log(user);
+		if(user == null){
+			console.log("ERRORRRR");
+			res.redirect("/login");
+		}
+		else{
+			console.log("userrrrrrrr" + user);
+			req.session.user_id = user._id;
+			res.redirect("/app");
+			//console.log(user);
+		}
 		//res.send("Hola mundo Session... Usuario_ID: " + user._id);
 	})
 });
