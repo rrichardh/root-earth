@@ -2,6 +2,7 @@ var express = require("express");
 var bodyParser = require("body-parser");
 var Usuario = require("./models/usuario").Usuario;
 var session = require("express-session");
+var ruta_app = require("./rutas_app");
 
 var server = express();
 
@@ -44,6 +45,8 @@ server.post("/sessions", function(req, res){
 		res.send("Hola mundo Session... Usuario_ID: " + user._id);
 	})
 });
+
+server.use("/app", ruta_app);
 
 server.post("/users", function(req, res){
 	console.log("Nombres: "+req.body.nombres);
