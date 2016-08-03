@@ -1,6 +1,7 @@
 var express = require("express");
 var bodyParser = require("body-parser");
 var Usuario = require("./models/usuario").Usuario;
+var session = require("express-session");
 
 var server = express();
 
@@ -9,6 +10,12 @@ server.use("/public",express.static('public'));
 //parsing = leer los archivos de la peticion
 server.use(bodyParser.json()); // para peticiones application/json
 server.use(bodyParser.urlencoded({extended: true}));
+
+server.use(session({
+	secret: "secreto123",
+	resave: false, // true = la sesion se vuelve a guardar
+	saveUninitialized: false //reduce el espacio que comsume en el storage
+}));
 
 server.set("view engine", "jade");
 
@@ -28,6 +35,14 @@ server.get('/login', function(req, res){
 	});
 
 	//res.render('login');
+});
+
+server.post("/sessions", function(req, res){
+	Usuario.findOne({usuario:req.body.usuario, password:req.body.password}, function(err, user){
+		req.session.user_id = user._id;
+		console.log(user);
+		res.send("Hola mundo Session... Usuario_ID: " + user._id);
+	})
 });
 
 server.post("/users", function(req, res){
