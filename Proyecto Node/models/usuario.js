@@ -8,7 +8,7 @@ var email_match = [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,"Coloca un Em
 
 var validar_password = {
 	validator:function(pass){
-		return this.password_confirmation == pass;
+		return this.password_confirmacion == pass;
 	},
 	message: "Las contraseñas no son iguales"
 };

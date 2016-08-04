@@ -87,7 +87,10 @@ server.post("/users", function(req, res){
 		if(err){
 			console.log(String(err));
 		}
-		res.send("Guardamos tus datos...");
+		else{
+			res.redirect("/login");
+		}
+		//res.send("Guardamos tus datos...");
 	})
 
 	//res.send("Felicitaciones, Usted esta logeado...");
