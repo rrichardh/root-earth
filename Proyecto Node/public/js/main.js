@@ -1,4 +1,6 @@
 function onDocumentReady(){
+	var socket = io.connect(window.location.href);
+
 	var map = L.map('mapa', {
 	    center: [0, -22],
 	    zoom: 3
@@ -22,6 +24,8 @@ function onDocumentReady(){
 		
 		map.addLayer(marker);
 		marker.bindPopup('Estoy Aquí'); //creando Popup
+
+		socket.emit('coords:me', {latlng: miCoordenada});
 	}
 }
 
