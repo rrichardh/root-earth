@@ -16,7 +16,7 @@ server.set('views', __dirname + '/views');
 server.set("view engine", "jade");
 server.use(express.static(__dirname + '/public'));
 
-server.use("/public",express.static('public'));
+//server.use("/public",express.static('public'));
 //parsing = leer los archivos de la peticion
 server.use(bodyParser.json()); // para peticiones application/json
 server.use(bodyParser.urlencoded({extended: true}));
@@ -32,9 +32,6 @@ server.use(cookieSession({
 	saveUninitialized: false //reduce el espacio que comsume en el storage
 }));*/
 
-server.set("view engine", "jade");
-
-
 server.get('/', function(req, res){
 	res.render("index");//render a index.jade
 });
@@ -45,7 +42,7 @@ server.get('/signup', function(req, res){
 
 server.get('/login', function(req, res){
 	Usuario.find(function(err, doc){
-		console.log(doc);
+		//console.log(doc);
 		res.render('login');
 	});
 
@@ -107,6 +104,21 @@ server.post("/users", function(req, res){
 	})
 
 	//res.send("Felicitaciones, Usted esta logeado...");
+});
+
+server.get('/ubicacion', function(req, res) {
+	//pasamos parametros a layoutMapa
+    res.render('layoutMapa', {
+    	title: 'Ubicación en Tiempo Real',
+    	description: 'Mi primera Ubicación'
+    });
+});
+
+io.sockets.on('connection', function(socket){
+	socket.on('coords:me', function(data){
+		console.log("DATA IO: " + data);
+		socket.broadcast.emit('coords:user', data);
+	});
 });
 
 serverh.listen(3000);

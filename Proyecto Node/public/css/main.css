@@ -21,7 +21,8 @@ h1 {
 
 #mapa {
 	position: absolute;
-	height: 100%;
-	top: 0;
+	top: 2em;
+	font-size: 1em;
+	bottom: 0;
 	width: 100%;
 }

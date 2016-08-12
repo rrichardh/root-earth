@@ -1,12 +1,15 @@
 extends ../layout.jade
 block contenido
-	h1 Usuario con Sesión Iniciada
-	h2 Hola #{usuario.usuario}
-	h1 Datos del Usuario
-	p #{usuario.nombre}
-	p #{usuario.apellido} 
-	p #{usuario.dni}
-	p #{usuario.fecha_naci}
-	p #{usuario.direccion} 
-	p #{usuario.cel}
-	p #{usuario.email}
+	div(class="col-md-12 remove-float center-block big-top-space")
+		h1 Usuario con Sesión Iniciada
+		h2 Hola #{usuario.usuario}
+		h1 Datos del Usuario
+		p #{usuario.nombre}
+		p #{usuario.apellido} 
+		p #{usuario.dni}
+		p #{usuario.fecha_naci}
+		p #{usuario.direccion} 
+		p #{usuario.cel}
+		p #{usuario.email}
+		div(class="col-xs-12 col-sm-6 text-right")
+						a(href="/ubicacion") Ver Mi Ubicacion por Mapa
