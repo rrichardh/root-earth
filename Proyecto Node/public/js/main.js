@@ -6,19 +6,22 @@ function onDocumentReady(){
 
 	var tiles = L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png');
 
-	var marker = L.marker([0, -23]);
-
 	map.addLayer(tiles); //añadir al mapa
-	map.addLayer(marker);
 
 	map.locate({
 		enableHighAccuracy: true
 	});
 
-	map.on('locationFound', onLocationFound);
+	map.on('locationfound', onLocationFound);
 
 	function onLocationFound(position){
 		console.log(position);
+
+		var miCoordenada = position.latlng;
+		var marker = L.marker([miCoordenada.lat, miCoordenada.lng]);
+		
+		map.addLayer(marker);
+		marker.bindPopup('Estoy Aquí'); //creando Popup
 	}
 }
 
