@@ -1,4 +1,5 @@
 var express = require("express");
+var http = require('http');
 var bodyParser = require("body-parser");
 var Usuario = require("./models/usuario").Usuario;
 //var session = require("express-session");
@@ -7,8 +8,14 @@ var ruta_app = require("./rutas_app");
 var session_middleware = require("./middlewares/session");
 
 var server = express();
+var serverh = http.createServer(server);
+var io = require('socket.io').listen(serverh);
 
 //middlewares
+server.set('views', __dirname + '/views');
+server.set("view engine", "jade");
+server.use(express.static(__dirname + '/public'));
+
 server.use("/public",express.static('public'));
 //parsing = leer los archivos de la peticion
 server.use(bodyParser.json()); // para peticiones application/json
@@ -102,5 +109,5 @@ server.post("/users", function(req, res){
 	//res.send("Felicitaciones, Usted esta logeado...");
 });
 
-server.listen(3000);
+serverh.listen(3000);
 console.log('Servidor corriendo en LOCALHOST...');

@@ -16,8 +16,10 @@ function onDocumentReady(){
 
 	map.on('locationfound', onLocationFound);
 
+	socket.on('coords:user', onReceiveData);
+
 	function onLocationFound(position){
-		console.log(position);
+		console.log("position" + position);
 
 		var miCoordenada = position.latlng;
 		var marker = L.marker([miCoordenada.lat, miCoordenada.lng]);
@@ -26,6 +28,15 @@ function onDocumentReady(){
 		marker.bindPopup('Estoy Aquí'); //creando Popup
 
 		socket.emit('coords:me', {latlng: miCoordenada});
+	}
+
+	function onReceiveData(data){
+		console.log("data" + data);
+		var coordsUser = data.latlng;
+		var marker = L.marker([coordsUser.lat, coordsUser.lng]);
+		
+		map.addLayer(marker);
+		marker.bindPopup('Estoy Aquí');
 	}
 }
 

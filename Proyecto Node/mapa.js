@@ -22,7 +22,8 @@ mapa.get('/', function(req, res) {
 
 io.sockets.on('connection', function(socket){
 	socket.on('coords:me', function(data){
-		console.log(data);
+		console.log("DATA IO: " + data);
+		socket.broadcast.emit('coords:user', data);
 	});
 });
 
